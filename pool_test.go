@@ -6,7 +6,7 @@ import "testing"
 
 // This is a benchmark of the Pool implementation
 // minimum space: 3072 btes. (4 lines * 32 entries * 24 bytes)
-// measured space: unkown
+// measured space: unknown
 // measured time: 2775 ns/op.
 func BenchmarkPool(b *testing.B) {
 	//	var m1, m2 runtime.MemStats
@@ -27,7 +27,7 @@ func BenchmarkPool(b *testing.B) {
 				handleIdx++
 			}
 		}
-		// Remove 255 pool objects - remove in reverse - reveral order may not matter
+		// Remove 255 pool objects - remove in reverse - reversal order may not matter
 		for i := 255; i >= 0; i-- {
 			Pool.Remove(handles[i])
 		}

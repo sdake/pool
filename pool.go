@@ -76,7 +76,7 @@ func (p Pool[T]) Remove(handle Handle) {
 // Size returns a rough estimate of the number of bytes used by the pool.
 func (p Pool[T]) Size() uint16 {
 	var entries uint16 = 0
-	var i uint16 = 0
+	var i uint16
 
 	for i = 0; i < p.lines; i++ {
 		entries += p.lineLengths[i]
@@ -97,7 +97,7 @@ func New[T Object](object T, lines uint16, lineLengths ...uint16) *Pool[T] {
 	pool.lines = lines
 	pool.lineLengths = lineLengths
 
-	var i uint16 = 0
+	var i uint16
 	for i = 0; i < lines; i++ {
 		pool.objects[i] = make([]T, lineLengths[i], lineLengths[i])
 		pool.bitmap[i] = 0
