@@ -3,7 +3,7 @@
 
 ✨ **`pool` is a bitmapped object cache implemented using Go generics.**
 
-## 💡 Why
+## ❓ Why
 
 - I wanted to learn Go generic syntax.
 - I wanted to minimize the memory consumption of object storage.
