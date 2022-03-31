@@ -6,8 +6,9 @@ import "testing"
 
 // This is a benchmark of the Pool implementation
 // minimum space: 3072 btes. (4 lines * 32 entries * 24 bytes)
-// measured space: unknown
-// measured time: 2775 ns/op.
+// measured space: 6416 bytes.
+// measured time: 2833 ns/op.
+// memory overhead: 208%
 func BenchmarkPool(b *testing.B) {
 	//	var m1, m2 runtime.MemStats
 	//	runtime.GC()
@@ -39,9 +40,9 @@ func BenchmarkPool(b *testing.B) {
 
 // This is a map based implementation of Pool
 // minimum space: 3072 btes. (4 lines * 32 entries * 24 bytes)
-// measured space: 17544 bytes.
-// measured time: 1195 ns/op.
-// This map based implementation has ~82% space overhead
+// measured space: 35192 bytes.
+// measured time: 2346 ns/op.
+// memory overhead: 1145%
 func BenchmarkMap(b *testing.B) {
 	type key struct {
 		line  uint16
