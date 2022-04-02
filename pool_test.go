@@ -59,7 +59,7 @@ func BenchmarkPool(b *testing.B) {
 }
 
 // This is a map based implementation of Pool
-// minimum space: 3072 btes. (4 lines * 32 entries * 24 bytes)
+// minimum space: 3072 bytes. (4 lines * 32 entries * 24 bytes)
 // measured space: 35192 bytes.
 // measured time: 2346 ns/op.
 // memory overhead: 1145%
