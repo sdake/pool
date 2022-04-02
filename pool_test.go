@@ -1,8 +1,18 @@
 package pool
 
-import "testing"
+import (
+	"testing"
+	"runtime"
+)
+
+type Object struct {
+	a int
+	b int
+	c int
+}
 
 // measurements use M1 Max Pro arm64 platform
+// produced with: go test -v -bench=. -benchtime=10s -benchmem
 
 // This is a benchmark of the Pool implementation
 // minimum space: 3072 btes. (4 lines * 32 entries * 24 bytes)
@@ -10,21 +20,31 @@ import "testing"
 // measured time: 2833 ns/op.
 // memory overhead: 208%
 func BenchmarkPool(b *testing.B) {
-	//	var m1, m2 runtime.MemStats
-	//	runtime.GC()
-	//	runtime.ReadMemStats(&m1)
+	var m1, m2 runtime.MemStats
+	runtime.GC()
+	runtime.ReadMemStats(&m1)
 
 	lineSize := []uint16{64, 64, 64, 64}
 	handles := new([256]Handle)
 	ObjectQ := Object{2, 1, 0xFFFFFFFF}
 
-	Pool := New(ObjectQ, 4, lineSize...)
+	Pool, err := New(ObjectQ, 4, lineSize...)
+	if err != nil {
+		b.Log(err)
+		return
+		
+	}
 	for n := 0; n < b.N; n++ {
 		// Add 128 pool objects across 4 cache lines
 		var handleIdx int = 0
 		for i := 0; i < 64; i++ {
 			for j := 0; j < 4; j++ {
-				handles[handleIdx] = Pool.Put(ObjectQ, uint16(j))
+				var err error
+				handles[handleIdx], err = Pool.Put(ObjectQ, uint16(j))
+				if err != nil {
+					b.Log(err)
+					return
+				}
 				handleIdx++
 			}
 		}
@@ -33,9 +53,9 @@ func BenchmarkPool(b *testing.B) {
 			Pool.Remove(handles[i])
 		}
 	}
-	//	runtime.ReadMemStats(&m2)
-	//	fmt.Println("total:", m2.TotalAlloc - m1.TotalAlloc)
-	//	fmt.Println("mallocs:", m2.Mallocs - m1.Mallocs)
+	runtime.ReadMemStats(&m2)
+	b.Logf("Total memory allocated: %v", m2.TotalAlloc - m1.TotalAlloc)
+	b.Logf("Total number of mallocs: %v", m2.Mallocs - m1.Mallocs)
 }
 
 // This is a map based implementation of Pool
@@ -49,13 +69,12 @@ func BenchmarkMap(b *testing.B) {
 		entry uint16
 	}
 
-	//	var m1, m2 runtime.MemStats
-	//	runtime.GC()
-	//	runtime.ReadMemStats(&m1)
+	var m1, m2 runtime.MemStats
+	runtime.GC()
+	runtime.ReadMemStats(&m1)
 
 	m := make(map[key]Object)
 	for n := 0; n < b.N; n++ {
-
 		for i := 0; i < 64; i++ {
 			for j := 0; j < 4; j++ {
 				key := key{uint16(i), uint16(j)}
@@ -65,7 +84,7 @@ func BenchmarkMap(b *testing.B) {
 		}
 	}
 
-	//	runtime.ReadMemStats(&m2)
-	//	fmt.Println("total:", m2.TotalAlloc - m1.TotalAlloc)
-	//	fmt.Println("mallocs:", m2.Mallocs - m1.Mallocs)
+	runtime.ReadMemStats(&m2)
+	b.Logf("Total memory allocated: %v", m2.TotalAlloc - m1.TotalAlloc)
+	b.Logf("Total number of mallocs: %v", m2.Mallocs - m1.Mallocs)
 }
