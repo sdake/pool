@@ -58,6 +58,4 @@ I don't accept donations. So please give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2022 [Steven Dake](https://github.com/sdake/).
-
-This project is [ASL2](./LICENSE) licensed.
+Copyright © [Steven Dake](https://github.com/sdake/). This project is [ASL2](./LICENSE) licensed.
