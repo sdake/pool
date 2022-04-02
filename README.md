@@ -1,6 +1,6 @@
 # ✨ pool is a Go generic bitmapped object cache.
 [![Go Report Card](https://goreportcard.com/badge/github.com/sdake/pool)](https://goreportcard.com/report/github.com/sdake/pool)
-[![GoDoc](https://godoc.org/sdake/pool?status.svg)](https://godoc.org/sdake/pool)
+[![GoDoc](https://godoc.org/github.com/sdake/pool?status.svg)](https://godoc.org/github.com/sdake/pool)
 
 ## ❓ Why
 
