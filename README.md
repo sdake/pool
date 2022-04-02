@@ -1,7 +1,7 @@
 # Pool
-[![Go report](https://goreportcard.com/badge/github.com/sdake/pool)](https://goreportcard.com/report/github.com/sdake/pool)
+[![Go report](https://goreportcard.com/badge/github.com/sdake/pool/)](https://goreportcard.com/report/github.com/sdake/pool/)
 
-✨ **`pool` is a bitmapped object cache implemented using Go generics.**
+✨ **`pool` is a bitmapped object cache implemented implemented  with Go generic support.**
 
 ## ❓ Why
 
@@ -29,7 +29,7 @@ type Object {
 	popcorn string
 }
 
-// Define the cache lines sizes. The minimum size is 64 entries.
+// Define the cache lines sizes. The minimum size is 64 entries. Cache line sizes must be multiples of 64.
 lineSize := []uint16{64, 64, 64, 64}
 
 // Create a pool object with 4 cache lines
@@ -53,10 +53,11 @@ pool.Remove(handle)
 
 ## 💫 Show your support
 
-Give a ⭐️ if this project helped you!
+I don't accept donations. So please give a ⭐️ if this project helped you!
+
 
 ## 📝 License
 
-Copyright © 2022 [Steven Dake](https://github.com/sdake).
+Copyright © 2022 [Steven Dake](https://github.com/sdake/).
 
 This project is [ASL2](./LICENSE) licensed.
