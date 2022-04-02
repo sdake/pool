@@ -1,5 +1,5 @@
 # Pool
-[![Go report](https://goreportcard.com/badge/github.com/sdake/pool/)](https://goreportcard.com/report/github.com/sdake/pool/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/sdake/pool)](https://goreportcard.com/report/github.com/sdake/pool)
 
 ✨ **`pool` is a bitmapped object cache implemented implemented  with Go generic support.**
 
