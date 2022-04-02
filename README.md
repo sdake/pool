@@ -1,4 +1,4 @@
-# ✨ pool is a bitmapped object cache implemented using Go generic support.
+# ✨ pool is a Go generic bitmapped object cache.
 [![Go Report Card](https://goreportcard.com/badge/github.com/sdake/pool)](https://goreportcard.com/report/github.com/sdake/pool)
 [![GoDoc](https://godoc.org/sdake/pool?status.svg)](https://godoc.org/sdake/pool)
 
