@@ -93,7 +93,7 @@ func (p Pool[T]) Size() uint16 {
 func New[T Object](object T, lines uint16, lineLengths ...uint16) (*Pool[T], error) {
 	var i uint16
 	for i = 0; i < lines; i++ {
-		if lineLengths[i] % 64 != 0 {
+		if lineLengths[i]%64 != 0 {
 			return nil, fmt.Errorf("First found invalid line length %v at line %v", lineLengths[i], i)
 		}
 	}

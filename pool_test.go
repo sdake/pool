@@ -1,8 +1,8 @@
 package pool
 
 import (
-	"testing"
 	"runtime"
+	"testing"
 )
 
 type Object struct {
@@ -32,7 +32,7 @@ func BenchmarkPool(b *testing.B) {
 	if err != nil {
 		b.Log(err)
 		return
-		
+
 	}
 	for n := 0; n < b.N; n++ {
 		// Add 128 pool objects across 4 cache lines
@@ -54,8 +54,8 @@ func BenchmarkPool(b *testing.B) {
 		}
 	}
 	runtime.ReadMemStats(&m2)
-	b.Logf("Total memory allocated: %v", m2.TotalAlloc - m1.TotalAlloc)
-	b.Logf("Total number of mallocs: %v", m2.Mallocs - m1.Mallocs)
+	b.Logf("Total memory allocated: %v", m2.TotalAlloc-m1.TotalAlloc)
+	b.Logf("Total number of mallocs: %v", m2.Mallocs-m1.Mallocs)
 }
 
 // This is a map based implementation of Pool
@@ -85,6 +85,6 @@ func BenchmarkMap(b *testing.B) {
 	}
 
 	runtime.ReadMemStats(&m2)
-	b.Logf("Total memory allocated: %v", m2.TotalAlloc - m1.TotalAlloc)
-	b.Logf("Total number of mallocs: %v", m2.Mallocs - m1.Mallocs)
+	b.Logf("Total memory allocated: %v", m2.TotalAlloc-m1.TotalAlloc)
+	b.Logf("Total number of mallocs: %v", m2.Mallocs-m1.Mallocs)
 }
